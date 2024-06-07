@@ -1,11 +1,8 @@
 class Author:
-
     all = []
-
     def __init__(self, name):
         self.name = name
         Author.all.append(self)
-
     def contracts(self):
         return [contract for contract in Contract.all if contract.author == self]
 
@@ -20,9 +17,7 @@ class Author:
 
 
 class Book:
-
     all = []
-
     def __init__(self, title):
         self.title = title
         Book.all.append(self)
@@ -33,10 +28,10 @@ class Book:
     def authors(self):
         return [contract.author for contract in self.contracts()]
 
+
+
 class Contract:
-
     all = []
-
     def __init__(self, author, book, date, royalties):
         self.author = author
         self.book = book
@@ -49,42 +44,41 @@ class Contract:
         return self._author
     
     @author.setter
-    def author(self, value):
-        if not isinstance(value, Author):
+    def author(self, author):
+        if not isinstance(author, Author):
             raise Exception
-        self._author = value
-
+        self._author = author
+    
     @property
     def book(self):
         return self._book
     
     @book.setter
-    def book(self, value):
-        if not isinstance(value, Book):
+    def book(self, book):
+        if not isinstance(book, Book):
             raise Exception
-        self._book = value
+        self._book = book
 
     @property
     def date(self):
         return self._date
-    
-    @date.setter
-    def date(self, value):
-        if not isinstance(value, str):
-            raise Exception
-        self._date = value
 
+    @date.setter
+    def date(self, date):
+        if not isinstance(date, str):
+            raise Exception
+        self._date = date
+    
     @property
     def royalties(self):
         return self._royalties
     
     @royalties.setter
-    def royalties(self, value):
-        if not isinstance(value, int):
+    def royalties(self, royalties):
+        if not isinstance(royalties, int):
             raise Exception
-        self._royalties = value
-
+        self._royalties = royalties
+    
     @classmethod
     def contracts_by_date(cls, date):
         return [contract for contract in cls.all if contract.date == date]
-        
